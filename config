@@ -50,7 +50,11 @@ set $mod Mod4
 set $mod2 Mod1
 
 #------------------------
-exec --no-startup-id xrandr --output DisplayPort-0 --mode 1920x1080 --rate 144
+# exec --no-startup-id xrandr --output DisplayPort-0 --mode 1920x1080 --rate 144
+
+# Place the screen correctly
+exec --no-startup-id /home/francois/.config/i3/mom_screen.sh
+# exec --no-startup-id /home/francois/.config/i3/dad_screen.sh
 
 # Canadian French. French Canadian. keyboard binding. keyboard layout. key binding
 exec_always --no-startup-id setxkbmap ca fr
@@ -206,7 +210,7 @@ bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/type-6/launcher.sh
 bindsym $mod2+d exec --no-startup-id ~/.config/rofi/launchers/type-6/launcher.sh
 
 
-bindsym $mod2+e exec --no-startup-id "/home/francois/.config/eww/dashboard/launch_dashboard"
+#bindsym $mod2+e exec --no-startup-id "/home/francois/.config/eww/dashboard/launch_dashboard"
 
 bindsym $mod+b exec --no-startup-id ~/.config/rofi/applets/bin/battery.sh
 bindsym $mod2+b exec --no-startup-id ~/.config/rofi/applets/bin/battery.sh
@@ -227,7 +231,6 @@ bindsym $mod2+p exec --no-startup-id ~/.config/rofi/applets/bin/powermenu.sh
 bindsym $mod+y exec --no-startup-id thunderbird
 
 bindsym $mod+t exec --no-startup-id ~/.config/rofi/applets/bin/screenshot.sh
-bindsym $mod2+t exec --no-startup-id ~/.config/rofi/applets/bin/screenshot.sh
 
 bindsym $mod+u exec --no-startup-id ~/.config/rofi/applets/bin/volume.sh
 bindsym $mod2+u exec --no-startup-id ~/.config/rofi/applets/bin/volume.sh
@@ -399,16 +402,16 @@ workspace $ws19 output HDMI-A-0
 workspace $ws20 output HDMI-A-0 
 #...
 
-workspace $ws21 output DP-1 
-workspace $ws22 output DP-1 
-workspace $ws23 output DP-1 
-workspace $ws24 output DP-1 
-workspace $ws25 output DP-1 
-workspace $ws26 output DP-1 
-workspace $ws27 output DP-1 
-workspace $ws28 output DP-1 
-workspace $ws29 output DP-1 
-workspace $ws30 output DP-1 
+workspace $ws21 output DisplayPort-1 
+workspace $ws22 output DisplayPort-1 
+workspace $ws23 output DisplayPort-1 
+workspace $ws24 output DisplayPort-1 
+workspace $ws25 output DisplayPort-1 
+workspace $ws26 output DisplayPort-1 
+workspace $ws27 output DisplayPort-1 
+workspace $ws28 output DisplayPort-1 
+workspace $ws29 output DisplayPort-1 
+workspace $ws30 output DisplayPort-1 
 #...
 
 
@@ -612,9 +615,9 @@ bindsym $mod+Control+2 exec --no-startup-id fish -c "pv $HOME/QolScripts/screen_
 
 bindsym $mod+Control+3 exec --no-startup-id $HOME/QolScripts/screen_placement_layout_n1.sh
 
-bindsym $mod+Control+4 exec --no-startup-id xrandr --output DP-1 --mode 2560x1440 --fbmm 597x366 --rate 75 --right-of HMDI-A-0 ; exec kcmshell6 kcm_kscreen
+bindsym $mod+Control+4 exec --no-startup-id xrandr --output DisplayPort-1 --mode 2560x1440 --fbmm 597x366 --rate 75 --right-of HMDI-A-0 ; exec kcmshell6 kcm_kscreen
 
-bindsym $mod+Control+5 exec --no-startup-id fish -c "pv $HOME/QolScripts/screen_placer.py HDMI-A-0 DP-1"
+bindsym $mod+Control+5 exec --no-startup-id fish -c "pv $HOME/QolScripts/screen_placer.py HDMI-A-0 DisplayPort-1"
 
 bindsym $mod+Control+6 exec --no-startup-id fish -c "pv $HOME/QolScripts/screen_placer.py"
 
@@ -824,6 +827,11 @@ for_window [class="Polybar"] floating enable
 # exec --no-startup-id $HOME/Pictures/Slideshow_Scripts/Parent/nohorny_slideshow.sh
 #Oh it only exec at boot makes sense
 bindsym $mod+x exec --no-startup-id "$HOME/Documents/Books/Novels/UncleDarkMage/download_script.sh"
+
+# Bind Alt+R to get mouse location
+bindsym $mod2+r exec --no-startup-id "/home/francois/Documents/Books/get_location_key.sh"
+bindsym $mod2+t exec --no-startup-id "/home/francois/Documents/Books/get_location.sh"
+
 
 
 
