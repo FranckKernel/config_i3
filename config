@@ -12,6 +12,45 @@
 # i3 config file (v4)
 ## Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+# For admin authentification. It's a sudo GUI
+exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
+exec --no-startup-id $HOME/BatteryInfo/start_battery_monitor.sh
+
+
+
+# Unset Wayland environment variable when i3 starts
+exec_always --no-startup-id sh -c 'unset HYPRLAND_INSTANCE_SIGNATURE'
+exec_always --no-startup-id fish -c 'set -e HYPRLAND_INSTANCE_SIGNATURE'
+exec_always --no-startup-id tmux setenv -g HYPRLAND_INSTANCE_SIGNATURE ''
+
+#This is the important one, it will make it so tmux doesn't chose the wrong display server
+exec --no-startup-id fish -c "kmux"
+
+
+#------------------------
+# Canadian French. French Canadian. keyboard binding. keyboard layout. key binding
+exec_always --no-startup-id setxkbmap ca fr
+#exec_always --no-startup-id $HOME/refresh_xbindkeys
+# Since now, I've switched to Windows+Right shift for those. 
+# I could add a custom toggle for xbindkeys. Using windows + guillemotleft («) next to shift. 
+
+
+
+
+
+
+
+
+#To replace all instance for monitors:
+# :%s/HMDI-A-0/HDMI-1/g
+
+#Find each occurrence of 'foo' (in all lines), and replace it with 'bar'.
+#:%s/foo/bar/g
+
+#Change each 'foo' to 'bar', but ask for confirmation first.
+#:%s/foo/bar/gc
+
+
 
 #white = #ffffff
 
@@ -30,118 +69,11 @@
 #green = #228b22
 
 #inkwell = #363945
+exec_always --no-startup-id feh  --bg-center --bg-fill --no-fehbg "$HOME/Pictures/Desktop Background Slideshow/Cool Pictures/resized_1200/8714ab1fb626c435433e749ca0cc83cd.png"
 
+exec_always --no-startup-id export TERMINAL=kitty
 
-
-
-#To replace all instance for monitors:
-# :%s/HMDI-A-0/HDMI-A-0/g
-
-#Find each occurrence of 'foo' (in all lines), and replace it with 'bar'.
-#:%s/foo/bar/g
-
-#Change each 'foo' to 'bar', but ask for confirmation first.
-#:%s/foo/bar/gc
-
-
-
-#Windows = mod (Primary). Alt = mod2 (Secondary)
-set $mod Mod4
-set $mod2 Mod1
-
-#------------------------
-# exec --no-startup-id xrandr --output DisplayPort-0 --mode 1920x1080 --rate 144
-
-# Place the screen correctly
-exec --no-startup-id /home/francois/.config/i3/mom_screen.sh
-# exec --no-startup-id /home/francois/.config/i3/dad_screen.sh
-
-# Canadian French. French Canadian. keyboard binding. keyboard layout. key binding
-exec_always --no-startup-id setxkbmap ca fr
-bindsym $mod+minus exec --no-startup-id setxkbmap ca fr
-bindsym $mod+equal exec --no-startup-id kanata
-
-
-
-
-# Polkit = For admin authentification. It's a sudo GUI
-exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
-exec --no-startup-id $HOME/BatteryInfo/start_battery_monitor.sh
-exec --no-startup-id eww daemon
-exec --no-startup-id kanata
-# exec_always --no-startup-id $HOME/.config/kanata/restart_kanata.sh
-#kanata is for home row modifiers keys
-
-
-# Unset Wayland environment variable when i3 starts
-exec_always --no-startup-id sh -c 'unset HYPRLAND_INSTANCE_SIGNATURE'
-exec_always --no-startup-id fish -c 'set -e HYPRLAND_INSTANCE_SIGNATURE'
-exec_always --no-startup-id tmux setenv -g HYPRLAND_INSTANCE_SIGNATURE ''
-
-#This is the important one, it will make it so tmux doesn't chose the wrong display server
-exec --no-startup-id fish -c "kmux"
-
-# Start XDG autostart .desktop files using dex. See also
-# https://wiki.archlinux.org/index.php/XDG_Autostart
-exec --no-startup-id dex --autostart --environment i3
-
-
-
-# xss-lock grabs a logind suspend inhibit lock and will use a specified locker to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-# exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l
-
-# Use xautolock to lock the screen after 1 minute of idle
-exec --no-startup-id xautolock -time 10 -locker "betterlockscreen -l" -notify 5 -notifier "notify-send 'Locking in 5 seconds...'"
-
-# Turn off the display after 15 seconds of idle time
-exec --no-startup-id xset dpms 0 0 615
-
-# Use xautolock to suspend-then-hibernate after 1 minute of idle
-# exec --no-startup-id xautolock -killtime 20 -killer "systemctl suspend"
-
-bindsym $mod+F10 exec --no-startup-id betterlockscreen -l
-bindsym $mod+F11 exec --no-startup-id xset dpms force off
-bindsym $mod+F12 exec --no-startup-id xset dpms force on
-
-
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id dunst
-exec --no-startup-id pasystray
-exec --no-startup-id nm-applet
-
-exec_always --no-startup-id export TERMINAL="kitty tmux"
-exec_always --no-startup-id $HOME/QolScripts/set_mouse_speed.sh 0.51 "skip_confirmation"
-
-
-######### POLYBAR
-exec_always --no-startup-id $HOME/.config/polybar.old/all_bars.sh
-
-exec_always --no-startup-id picom -b --config $HOME/.config/picom/picom.conf
-#--------------------------------BACGROUND IMAGES
-set $samurai_background "/home/francois/Pictures/Desktop Background Slideshow/Cool Pictures/resized_1200/f2d4po3oiaj81.png"
-set $sekiro_background "$HOME/Pictures/Desktop Background Slideshow/Cool Pictures/resized_1200/8714ab1fb626c435433e749ca0cc83cd.png"
-
-set $pink_anime_girl_background "/home/francois/Pictures/Desktop Background Slideshow/Cool Pictures/resized_1200/1353156.png"
-set $butterfly_anime_girl_background "/home/francois/Pictures/Desktop Background Slideshow/Cool Pictures/resized_1200/wp13334761.png"
-
-set $malenia_background "$HOME/Pictures/Desktop Background Slideshow/Cool Pictures/resized_1200/wp13527036-malenia-elden-ring-wallpapers.png"
-set $cyberpunk_anime_girl_background "$HOME/Pictures/Desktop Background Slideshow/Cool Pictures/resized_1200/anime cyberpunk girl.png"
-
-set $mortal_blade_background "/home/francois/Pictures/Desktop Background Slideshow/Cool Pictures/resized_1200/1311862.png"
-set $ranni_moon_background "/home/francois/Pictures/Desktop Background Slideshow/Cool Pictures/resized_1200/1342688.png"
-
-
-exec_always --no-startup-id feh  --bg-center --bg-fill --no-fehbg $samurai_background $sekiro_background
-bindsym $mod+Control+r exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg $samurai_background $malenia_background
-
-
-
-exec --no-startup-id $HOME/QolScripts/set_lock_screen.sh
-exec --no-startup-id $HOME/.config/conky/conky_toggle
-exec --no-startup-id youtube-music
-
+exec_always --no-startup-id $HOME/QolScripts/set_mouse_speed.sh 0.63 "skip_confirmation"
 
 
 
@@ -155,9 +87,27 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
 client.background       #FFFFFF
 
+#bar {
+#  colors {
+#    background #000000
+#    statusline #FFFFFF
+#    separator  #666666
 
+#    focused_workspace  #4C7899 #285577 #FFFFFF
+#    active_workspace   #333333 #222222 #FFFFFF
+#    inactive_workspace #333333 #222222 #888888
+#    urgent_workspace   #2F343A #900000 #FFFFFF
+#    binding_mode       #2F343A #900000 #FFFFFF
+#  }
+#}
 
+#exec --no-startup-id rm $HOME/.config/google-chrome/SingletonLock
+#exec --no-startup-id rm $HOME/.viminfo
+#exec --no-startup-id rm -rf ~/.cache/thumbnails/*
 
+#Windows = mod (Primary). Alt = mod2 (Secondary)
+set $mod Mod4
+set $mod2 Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -167,27 +117,54 @@ font pango:monospace 12
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
 
+# Start XDG autostart .desktop files using dex. See also
+# https://wiki.archlinux.org/index.php/XDG_Autostart
+exec --no-startup-id dex --autostart --environment i3
 
+
+# xss-lock grabs a logind suspend inhibit lock and will use a specified locker to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l
+
+# Use xautolock to lock the screen after 10 minutes of idle
+exec --no-startup-id xautolock -time 10 -locker "betterlockscreen -l" -notify 30 -notifier "notify-send 'Locking in 30 seconds...'"
+
+# Turn off the display after 15 minutes of idle time
+exec --no-startup-id xset dpms 0 0 900
+
+# Use xautolock to suspend-then-hibernate after 20 minutes of idle
+exec --no-startup-id xautolock -killtime 20 -killer "systemctl suspend-then-hibernate"
+
+
+
+# NetworkManager is the most popular way to manage wireless networks on Linux,
+# and nm-applet is a desktop environment-independent system tray GUI for it.
+exec --no-startup-id dunst
+exec --no-startup-id pasystray
+exec --no-startup-id nm-applet
+exec --no-startup-id kanata
+
+#exec --no-startup-id notify-send -u low -t 5000 "loading into i3"
 
 
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@   +10%   && $refresh_i3status
-#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@   -10%   && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@   +10%   && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@   -10%   && $refresh_i3status
 bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@   toggle && $refresh_i3status
-#bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty tmux
 bindsym $mod+h exec kitty tmux
+bindsym $mod+Return exec kitty tmux
 bindsym $mod2+Return exec kitty tmux #big fingers
 
 
-bindsym $mod+less exec alacritty
+bindsym $mod+dead_grave exec alacritty
 #i3-sensible-terminal was default
 #options: Terminator, alacritty, gnome-terminal
 
@@ -210,8 +187,6 @@ bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/type-6/launcher.sh
 bindsym $mod2+d exec --no-startup-id ~/.config/rofi/launchers/type-6/launcher.sh
 
 
-#bindsym $mod2+e exec --no-startup-id "/home/francois/.config/eww/dashboard/launch_dashboard"
-
 bindsym $mod+b exec --no-startup-id ~/.config/rofi/applets/bin/battery.sh
 bindsym $mod2+b exec --no-startup-id ~/.config/rofi/applets/bin/battery.sh
 
@@ -231,14 +206,12 @@ bindsym $mod2+p exec --no-startup-id ~/.config/rofi/applets/bin/powermenu.sh
 bindsym $mod+y exec --no-startup-id thunderbird
 
 bindsym $mod+t exec --no-startup-id ~/.config/rofi/applets/bin/screenshot.sh
+bindsym $mod2+t exec --no-startup-id ~/.config/rofi/applets/bin/screenshot.sh
 
 bindsym $mod+u exec --no-startup-id ~/.config/rofi/applets/bin/volume.sh
 bindsym $mod2+u exec --no-startup-id ~/.config/rofi/applets/bin/volume.sh
 
-bindsym $mod+n exec --no-startup-id $HOME/QolScripts/toggle_nightlight_x11.sh
-bindsym $mod+Shift+n exec $HOME/QolScripts/toggle_invert_colors.sh
-
-# bindsym $mod+n exec --no-startup-id rofi -modi emoji -show emoji
+bindsym $mod+n exec --no-startup-id rofi -modi emoji -show emoji
 bindsym $mod2+n exec --no-startup-id rofi -modi emoji -show emoji
 
 bindsym $mod+Tab exec --no-startup-id rofi -show window
@@ -377,41 +350,41 @@ set $ws30 "30"
 
 
 # this is useless since it goes to promary screen anyway
-workspace $ws1 output DisplayPort-0 
-workspace $ws2 output DisplayPort-0 
-workspace $ws3 output DisplayPort-0 
-workspace $ws4 output DisplayPort-0 
-workspace $ws5 output DisplayPort-0 
-workspace $ws6 output DisplayPort-0 
-workspace $ws7 output DisplayPort-0 
-workspace $ws8 output DisplayPort-0 
-workspace $ws9 output DisplayPort-0 
-workspace $ws10 output DisplayPort-0 
+workspace $ws1 output eDP-1 
+workspace $ws2 output eDP-1 
+workspace $ws3 output eDP-1 
+workspace $ws4 output eDP-1 
+workspace $ws5 output eDP-1 
+workspace $ws6 output eDP-1 
+workspace $ws7 output eDP-1 
+workspace $ws8 output eDP-1 
+workspace $ws9 output eDP-1 
+workspace $ws10 output eDP-1 
 #...
 
 # This is usefull for when there's the second screen
-workspace $ws11 output HDMI-A-0 
-workspace $ws12 output HDMI-A-0 
-workspace $ws13 output HDMI-A-0 
-workspace $ws14 output HDMI-A-0 
-workspace $ws15 output HDMI-A-0 
-workspace $ws16 output HDMI-A-0 
-workspace $ws17 output HDMI-A-0 
-workspace $ws18 output HDMI-A-0 
-workspace $ws19 output HDMI-A-0 
-workspace $ws20 output HDMI-A-0 
+workspace $ws11 output HDMI-1 
+workspace $ws12 output HDMI-1 
+workspace $ws13 output HDMI-1 
+workspace $ws14 output HDMI-1 
+workspace $ws15 output HDMI-1 
+workspace $ws16 output HDMI-1 
+workspace $ws17 output HDMI-1 
+workspace $ws18 output HDMI-1 
+workspace $ws19 output HDMI-1 
+workspace $ws20 output HDMI-1 
 #...
 
-workspace $ws21 output DisplayPort-1 
-workspace $ws22 output DisplayPort-1 
-workspace $ws23 output DisplayPort-1 
-workspace $ws24 output DisplayPort-1 
-workspace $ws25 output DisplayPort-1 
-workspace $ws26 output DisplayPort-1 
-workspace $ws27 output DisplayPort-1 
-workspace $ws28 output DisplayPort-1 
-workspace $ws29 output DisplayPort-1 
-workspace $ws30 output DisplayPort-1 
+workspace $ws21 output DP-1 
+workspace $ws22 output DP-1 
+workspace $ws23 output DP-1 
+workspace $ws24 output DP-1 
+workspace $ws25 output DP-1 
+workspace $ws26 output DP-1 
+workspace $ws27 output DP-1 
+workspace $ws28 output DP-1 
+workspace $ws29 output DP-1 
+workspace $ws30 output DP-1 
 #...
 
 
@@ -502,9 +475,8 @@ bindsym $mod+$mod2+Shift+0 move container to workspace number $ws30
 
 #assign [class="Org.gnome.Nautilus"] $ws1
 #assign [class="Alacritty"] $ws2
-assign [class="zen"] $ws13
+#assign [class="firefox"] $ws3
 assign [class="Rhythmbox"] $ws10
-assign [class="YouTube Music"] $ws20
 #assign [class="Totem"] $ws10 #the basic gnome video player
 
 
@@ -566,6 +538,8 @@ bindsym $mod+r mode "resize"
 
 
 
+######### POLYBAR
+exec_always --no-startup-id $HOME/.config/polybar.old/all_bars.sh
 
 
 
@@ -573,10 +547,10 @@ bindsym $mod+r mode "resize"
 
 #-------------------------------------------- start of perso stuff
 
-
-
-
-
+#bindsym $mod+l exec i3lock -i ~/Pictures/Desktop\ Background\ Slideshow/resized/anime\ cyberpunk\ girl.png
+exec --no-startup-id $HOME/QolScripts/set_lock_screen.sh
+#bindsym $mod+l exec betterlockscreen -l
+bindsym $mod+F10 exec --no-startup-id betterlockscreen -l
 
 # Pulse Audio controls
 #bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
@@ -600,6 +574,7 @@ bindsym $mod2+Shift+space exec --no-startup-id brightnessctl -d platform::kbd_ba
 
 
 
+exec_always --no-startup-id picom -b --config $HOME/.config/picom/picom.conf
 
 
 
@@ -608,44 +583,46 @@ bindsym $mod2+Shift+space exec --no-startup-id brightnessctl -d platform::kbd_ba
 
 
 
+#Huh, why is there a script
+exec --no-startup-id xrandr --output HDMI-1  ; $HOME/QolScripts/turn_off_other_screens.sh
 
 bindsym $mod+Control+1 exec --no-startup-id  $HOME/QolScripts/turn_off_other_screens.sh
 
-bindsym $mod+Control+2 exec --no-startup-id fish -c "pv $HOME/QolScripts/screen_placer.py DisplayPort-0 HDMI-A-0" ; exec --no-startup-id $HOME/QolScripts/set_lock_screen.sh
+bindsym $mod+Control+2 exec --no-startup-id fish -c "pv $HOME/QolScripts/screen_placer.py eDP-1 HDMI-1" ; exec --no-startup-id $HOME/QolScripts/set_lock_screen.sh
+
 
 bindsym $mod+Control+3 exec --no-startup-id $HOME/QolScripts/screen_placement_layout_n1.sh
 
-bindsym $mod+Control+4 exec --no-startup-id xrandr --output DisplayPort-1 --mode 2560x1440 --fbmm 597x366 --rate 75 --right-of HMDI-A-0 ; exec kcmshell6 kcm_kscreen
+bindsym $mod+Control+4 exec --no-startup-id xrandr --output DP-1 --mode 2560x1440 --fbmm 597x366 --rate 75 --right-of HMDI-1 ; exec kcmshell6 kcm_kscreen ; $HOME/QolScripts/set_lock_screen.sh
 
-bindsym $mod+Control+5 exec --no-startup-id fish -c "pv $HOME/QolScripts/screen_placer.py HDMI-A-0 DisplayPort-1"
+bindsym $mod+Control+5 exec --no-startup-id fish -c "pv $HOME/QolScripts/screen_placer.py HDMI-1 DP-1"
 
 bindsym $mod+Control+6 exec --no-startup-id fish -c "pv $HOME/QolScripts/screen_placer.py"
 
-bindsym $mod+Control+0 exec --no-startup-id exec kcmshell6 kcm_kscreen
-
-
-bindsym $mod+Control+t       exec --no-startup-id  $HOME/.config/polybar.old/polybar_toggle bar0
+bindsym $mod+Control+t       exec --no-startup-id  $HOME/.config/polybar.old/polybar_toggle bar1
 bindsym $mod+Control+Shift+b       exec --no-startup-id  $HOME/.config/polybar.old/polybar_toggle bar2
 bindsym $mod+Control+b exec --no-startup-id  $HOME/.config/polybar.old/polybar_toggle bar3
 bindsym $mod+Control+c exec --no-startup-id  $HOME/.config/conky/conky_toggle
+exec --no-startup-id $HOME/.config/conky/conky_toggle
 
 bindsym $mod+Control+p exec --no-startup-id  $HOME/.config/picom/picom_toggler.sh
 
 
 bindsym $mod+c exec --no-startup-id thunar
-bindsym $mod+w exec --no-startup-id $HOME/.local/bin/zen
+bindsym $mod+w exec --no-startup-id firefox
 bindsym $mod+Shift+w exec --no-startup-id firefox --private-window
+bindsym $mod2+w exec --no-startup-id google-chrome-stable
+bindsym $mod2+Shift+w exec --no-startup-id google-chrome-stable --incognito
+
 #bindsym $mod+w exec --no-startup-id $HOME/google_launch
 
 bindsym $mod2+c exec --no-startup-id dolphin
-bindsym $mod2+w exec --no-startup-id $HOME/google_launch
 
 bindsym $mod+Control+h       exec --no-startup-id $HOME/Pictures/Slideshow_Scripts/Parent/horny_slideshow.sh & 
 bindsym $mod+Control+Shift+h exec --no-startup-id $HOME/Pictures/Slideshow_Scripts/Parent/toohorny_slideshow.sh & 
 bindsym $mod+$mod2+Shift+h exec --no-startup-id $HOME/Pictures/Slideshow_Scripts/Master/s_slideshow.sh & 
 bindsym $mod+Control+n       exec --no-startup-id $HOME/Pictures/Slideshow_Scripts/Parent/nohorny_slideshow.sh & 
-
-bindsym $mod+Control+Shift+n       exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg $sekiro_background 
+bindsym $mod+Control+shift+n       exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg "/home/francois/Pictures/Desktop Background Slideshow/Cool Pictures/resized_1200/f2d4po3oiaj81.png"
 
 
 bindsym $mod+Control+j             exec --no-startup-id $HOME/Pictures/Slideshow_Scripts/Master/previous.sh
@@ -656,21 +633,22 @@ bindsym $mod+Control+i             exec --no-startup-id $HOME/Pictures/Slideshow
 bindsym $mod+Control+o             exec --no-startup-id $HOME/Pictures/Slideshow_Scripts/Master/faster.sh
 
 
-bindsym $mod+Control+m       exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg $malenia_background 
-bindsym $mod+Control+Shift+m       exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg $cyberpunk_anime_girl__background
+bindsym $mod+Control+m       exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg "$HOME/Pictures/Desktop Background Slideshow/Cool Pictures/resized_1200/wp13527036-malenia-elden-ring-wallpapers.png"
+bindsym $mod+Control+Shift+m       exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg "$HOME/Pictures/Desktop Background Slideshow/Cool Pictures/resized_1200/anime cyberpunk girl.png"
 
 
 
-bindsym $mod2+Control+n       exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg $sekiro_background 
-bindsym $mod2+Control+shift+n       exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg $samurai_background
+bindsym $mod2+Control+n       exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg "/home/francois/Pictures/Desktop Background Slideshow/Cool Pictures/resized_1200/8714ab1fb626c435433e749ca0cc83cd.png"
+bindsym $mod2+Control+shift+n       exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg "/home/francois/Pictures/Desktop Background Slideshow/Cool Pictures/resized_1200/f2d4po3oiaj81.png"
 
 
-bindsym $mod2+Control+m       exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg $pink_anime_girl_background
-bindsym $mod2+Control+shift+m       exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg $butterfly_anime_girl_background
+bindsym $mod2+Control+m       exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg "/home/francois/Pictures/Desktop Background Slideshow/Cool Pictures/resized_1200/1353156.png"
+bindsym $mod2+Control+shift+m       exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg "/home/francois/Pictures/Desktop Background Slideshow/Cool Pictures/resized_1200/wp13334761.png"
 
+bindsym $mod2+Control+b       exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg "/home/francois/Pictures/Desktop Background Slideshow/Cool Pictures/resized_1200/1342688.png"
+bindsym $mod2+Control+shift+b       exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg "/home/francois/Pictures/Desktop Background Slideshow/Cool Pictures/resized_1200/1311862.png"
 
-bindsym $mod2+Control+b       exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg $mortal_blade_background
-bindsym $mod2+Control+shift+b       exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg $ranni_moon_background
+bindsym $mod2+Control+ v      exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg "/home/francois/Pictures/png"
 
 # Media player controls
 bindsym $mod+$mod2+Up   exec --no-startup-id mpc volume +5
@@ -763,20 +741,20 @@ bindsym $mod+$mod2+Control+Down exec "$HOME/Videos/i3-video-wallpaper-main/mpv-c
 bindsym $mod+$mod2+Control+Up exec "$HOME/Videos/i3-video-wallpaper-main/mpv-control.sh volume +5"
 
 # Pactl volume down
-bindsym $mod+End exec "pactl set-sink-volume @DEFAULT_SINK@ -1%"
-bindsym $mod+Shift+End exec "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+bindsym $mod+Home exec "pactl set-sink-volume @DEFAULT_SINK@ -1%"
+bindsym $mod+Shift+Home exec "pactl set-sink-volume @DEFAULT_SINK@ -5%"
 
 # Pactl volume up
-bindsym $mod+Home exec "pactl set-sink-volume @DEFAULT_SINK@ +1%"
-bindsym $mod+Shift+Home exec "pactl set-sink-volume @DEFAULT_SINK@ +5%"
+bindsym $mod+End exec "pactl set-sink-volume @DEFAULT_SINK@ +1%"
+bindsym $mod+Shift+End exec "pactl set-sink-volume @DEFAULT_SINK@ +5%"
 
 # Pactl volume down
-bindsym $mod2+End exec "pactl set-sink-volume @DEFAULT_SINK@ -1%"
-bindsym $mod2+Shift+End exec "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+bindsym $mod2+Home exec "pactl set-sink-volume @DEFAULT_SINK@ -1%"
+bindsym $mod2+Shift+Home exec "pactl set-sink-volume @DEFAULT_SINK@ -5%"
 
 # Pactl volume up
-bindsym $mod2+Home exec "pactl set-sink-volume @DEFAULT_SINK@ +1%"
-bindsym $mod2+Shift+Home exec "pactl set-sink-volume @DEFAULT_SINK@ +5%"
+bindsym $mod2+End exec "pactl set-sink-volume @DEFAULT_SINK@ +1%"
+bindsym $mod2+Shift+End exec "pactl set-sink-volume @DEFAULT_SINK@ +5%"
 
 # MPC volume down
 bindsym $mod2+Next exec "mpc volume -1"
@@ -814,7 +792,7 @@ default_border pixel 2
 
 
 bindsym $mod+Control+f exec --no-startup-id /home/francois/.config/conky/show_all/shuffle_x.sh
-bindsym $mod+Control+g exec --no-startup-id /home/francois/.onfig/conky/show_all/shuffle_y.sh
+bindsym $mod+Control+g exec --no-startup-id /home/francois/.config/conky/show_all/shuffle_y.sh
 
 gaps inner 6
 gaps outer 5
@@ -826,17 +804,12 @@ for_window [class="Polybar"] floating enable
 
 # exec --no-startup-id $HOME/Pictures/Slideshow_Scripts/Parent/nohorny_slideshow.sh
 #Oh it only exec at boot makes sense
-bindsym $mod+x exec --no-startup-id "$HOME/Documents/Books/Novels/UncleDarkMage/download_script.sh"
-
-# Bind Alt+R to get mouse location
-bindsym $mod2+r exec --no-startup-id "/home/francois/Documents/Books/get_location_key.sh"
-bindsym $mod2+t exec --no-startup-id "/home/francois/Documents/Books/get_location.sh"
-
-
+bindsym $mod+x exec fish -c "set_public"
 
 
 #exec --no-startup-id mpd
 #exec --no-startup-id mpdris2-rs --no-notification --host localhost:6600
 
 #exec --no-startup-id "$HOME/WindowsFileSystem/mount_windows.sh"
+bindsym $mod+minus exec --no-startup-id setxkbmap ca fr
 exec_always --no-startup-id setxkbmap ca fr
