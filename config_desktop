@@ -640,6 +640,7 @@ bindsym $mod+Shift+w exec --no-startup-id firefox --private-window
 bindsym $mod2+c exec --no-startup-id dolphin
 bindsym $mod2+w exec --no-startup-id $HOME/google_launch
 
+# Nice meme/Troll
 bindsym $mod+Control+h       exec --no-startup-id $HOME/Pictures/Slideshow_Scripts/Parent/horny_slideshow.sh & 
 bindsym $mod+Control+Shift+h exec --no-startup-id $HOME/Pictures/Slideshow_Scripts/Parent/toohorny_slideshow.sh & 
 bindsym $mod+$mod2+Shift+h exec --no-startup-id $HOME/Pictures/Slideshow_Scripts/Master/s_slideshow.sh & 
