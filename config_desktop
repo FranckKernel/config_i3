@@ -116,7 +116,7 @@ exec_always --no-startup-id $HOME/QolScripts/set_mouse_speed.sh 0.51 "skip_confi
 
 
 ######### POLYBAR
-exec_always --no-startup-id $HOME/.config/polybar.old/all_bars.sh
+exec_always --no-startup-id $HOME/.config/polybar/all_bars.sh
 
 exec_always --no-startup-id picom -b --config $HOME/.config/picom/picom.conf
 #--------------------------------BACGROUND IMAGES
@@ -624,9 +624,9 @@ bindsym $mod+Control+6 exec --no-startup-id fish -c "pv $HOME/QolScripts/screen_
 bindsym $mod+Control+0 exec --no-startup-id exec kcmshell6 kcm_kscreen
 
 
-bindsym $mod+Control+t       exec --no-startup-id  $HOME/.config/polybar.old/polybar_toggle bar0
-bindsym $mod+Control+Shift+b       exec --no-startup-id  $HOME/.config/polybar.old/polybar_toggle bar2
-bindsym $mod+Control+b exec --no-startup-id  $HOME/.config/polybar.old/polybar_toggle bar3
+bindsym $mod+Control+t       exec --no-startup-id  $HOME/.config/polybar/polybar_toggle bar0
+bindsym $mod+Control+Shift+b       exec --no-startup-id  $HOME/.config/polybar/polybar_toggle bar2
+bindsym $mod+Control+b exec --no-startup-id  $HOME/.config/polybar/polybar_toggle bar3
 bindsym $mod+Control+c exec --no-startup-id  $HOME/.config/conky/conky_toggle
 
 bindsym $mod+Control+p exec --no-startup-id  $HOME/.config/picom/picom_toggler.sh
