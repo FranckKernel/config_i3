@@ -49,6 +49,11 @@
 set $mod Mod4
 set $mod2 Mod1
 
+
+set $terminal kitty
+set $browser "$HOME/.local/bin/zen"
+set $brower1 "firefox"
+
 #------------------------
 # exec --no-startup-id xrandr --output DisplayPort-0 --mode 1920x1080 --rate 144
 
@@ -71,6 +76,7 @@ exec --no-startup-id eww daemon
 exec --no-startup-id kanata
 # exec_always --no-startup-id $HOME/.config/kanata/restart_kanata.sh
 #kanata is for home row modifiers keys
+
 
 
 # Unset Wayland environment variable when i3 starts
@@ -120,6 +126,7 @@ exec_always --no-startup-id $HOME/.config/polybar/all_bars.sh
 
 exec_always --no-startup-id picom -b --config $HOME/.config/picom/picom.conf
 #--------------------------------BACGROUND IMAGES
+set $blue_water "$HOME/.config/i3/wallpapers/blue_water.jpg"
 set $samurai_background "$HOME/.config/i3/wallpapers/samurai_background_1080.png"
 set $sekiro_background "$HOME/.config/i3/wallpapers/sekiro_dragon_1440p.jpeg"
 
@@ -133,11 +140,12 @@ set $mortal_blade_background "$HOME/.config/i3/wallpapers/Sekiro-Mortal-Blade.pn
 set $ranni_moon_background "$HOME/.config/i3/wallpapers/ranni_moon_1440p.jpeg"
 
 
-exec_always --no-startup-id feh  --bg-center --bg-fill --no-fehbg $samurai_background $sekiro_background
+exec_always --no-startup-id feh  --bg-center --bg-fill --no-fehbg $blue_water $malenia_background $sekiro_background
 bindsym $mod+Control+r exec --no-startup-id feh  --bg-center --bg-fill --no-fehbg $samurai_background $malenia_background
 
 
-
+exec --no-startup-id $browser
+exec --no-startup-id $terminal
 exec --no-startup-id $HOME/QolScripts/set_lock_screen.sh
 exec --no-startup-id $HOME/.config/conky/conky_toggle
 exec --no-startup-id youtube-music
@@ -182,9 +190,9 @@ bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute   @DEFAULT
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty tmux
-bindsym $mod+h exec kitty tmux
-bindsym $mod2+Return exec kitty tmux #big fingers
+bindsym $mod+Return exec $terminal tmux
+bindsym $mod+h exec $terminal tmux
+bindsym $mod2+Return exec $terminal tmux #big fingers
 
 
 bindsym $mod+less exec alacritty
@@ -376,7 +384,7 @@ set $ws30 "30"
 
 
 
-# this is useless since it goes to promary screen anyway
+# this is useless since it goes to primary screen anyway
 workspace $ws1 output DisplayPort-0 
 workspace $ws2 output DisplayPort-0 
 workspace $ws3 output DisplayPort-0 
@@ -460,56 +468,55 @@ bindsym $mod+$mod2+0 workspace number $ws30
 #--------------------------------move focused container to workspace
 
 # Main Screen
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+1 move container to workspace number $ws1; workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2; workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3; workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4; workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5; workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6; workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7; workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8; workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9; workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10; workspace number $ws10
 
 
 
 # Second Screen
-bindsym $mod2+Shift+1 move container to workspace number $ws11
-bindsym $mod2+Shift+2 move container to workspace number $ws12
-bindsym $mod2+Shift+3 move container to workspace number $ws13
-bindsym $mod2+Shift+4 move container to workspace number $ws14
-bindsym $mod2+Shift+5 move container to workspace number $ws15
-bindsym $mod2+Shift+6 move container to workspace number $ws16
-bindsym $mod2+Shift+7 move container to workspace number $ws17
-bindsym $mod2+Shift+8 move container to workspace number $ws18
-bindsym $mod2+Shift+9 move container to workspace number $ws19
-bindsym $mod2+Shift+0 move container to workspace number $ws20
-
+bindsym $mod2+Shift+1 move container to workspace number $ws11; workspace number $ws11
+bindsym $mod2+Shift+2 move container to workspace number $ws12; workspace number $ws12
+bindsym $mod2+Shift+3 move container to workspace number $ws13; workspace number $ws13
+bindsym $mod2+Shift+4 move container to workspace number $ws14; workspace number $ws14
+bindsym $mod2+Shift+5 move container to workspace number $ws15; workspace number $ws15
+bindsym $mod2+Shift+6 move container to workspace number $ws16; workspace number $ws16
+bindsym $mod2+Shift+7 move container to workspace number $ws17; workspace number $ws17
+bindsym $mod2+Shift+8 move container to workspace number $ws18; workspace number $ws18
+bindsym $mod2+Shift+9 move container to workspace number $ws19; workspace number $ws19
+bindsym $mod2+Shift+0 move container to workspace number $ws20; workspace number $ws20
 
 # Third Screen
-bindsym $mod+$mod2+Shift+1 move container to workspace number $ws21
-bindsym $mod+$mod2+Shift+2 move container to workspace number $ws22
-bindsym $mod+$mod2+Shift+3 move container to workspace number $ws23
-bindsym $mod+$mod2+Shift+4 move container to workspace number $ws24
-bindsym $mod+$mod2+Shift+5 move container to workspace number $ws25
-bindsym $mod+$mod2+Shift+6 move container to workspace number $ws26
-bindsym $mod+$mod2+Shift+7 move container to workspace number $ws27
-bindsym $mod+$mod2+Shift+8 move container to workspace number $ws28
-bindsym $mod+$mod2+Shift+9 move container to workspace number $ws29
-bindsym $mod+$mod2+Shift+0 move container to workspace number $ws30
+bindsym $mod+$mod2+Shift+1 move container to workspace number $ws21; workspace number $ws21
+bindsym $mod+$mod2+Shift+2 move container to workspace number $ws22; workspace number $ws22
+bindsym $mod+$mod2+Shift+3 move container to workspace number $ws23; workspace number $ws23
+bindsym $mod+$mod2+Shift+4 move container to workspace number $ws24; workspace number $ws24
+bindsym $mod+$mod2+Shift+5 move container to workspace number $ws25; workspace number $ws25
+bindsym $mod+$mod2+Shift+6 move container to workspace number $ws26; workspace number $ws26
+bindsym $mod+$mod2+Shift+7 move container to workspace number $ws27; workspace number $ws27
+bindsym $mod+$mod2+Shift+8 move container to workspace number $ws28; workspace number $ws28
+bindsym $mod+$mod2+Shift+9 move container to workspace number $ws29; workspace number $ws29
+bindsym $mod+$mod2+Shift+0 move container to workspace number $ws30; workspace number $ws30
 
 
 
 #assign [class="Org.gnome.Nautilus"] $ws1
 #assign [class="Alacritty"] $ws2
-assign [class="zen"] $ws13
+assign [class="^zen$"] $ws13
 assign [class="Rhythmbox"] $ws10
-assign [class="YouTube Music"] $ws20
+assign [class="com.github.th_ch.youtube_music"] $ws20
 #assign [class="Totem"] $ws10 #the basic gnome video player
 
 
 
-assign [class="thunderbird"] $ws7
+assign [class="^org\.mozilla\.Thunderbird$"] $ws7
 assign [class="discord"] $ws6
 
 
@@ -795,8 +802,8 @@ bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 
-bindsym $mod+Shift+m  exec --no-startup-id kitty -e tmux new-session -s Music 'ncmpcpp'
-bindsym $mod2+Shift+m exec --no-startup-id kitty -e tmux new-session 'ncmpcpp'
+bindsym $mod+Shift+m  exec --no-startup-id $terminal -e tmux new-session -s Music 'ncmpcpp'
+bindsym $mod2+Shift+m exec --no-startup-id $terminal -e tmux new-session 'ncmpcpp'
 bindsym $mod+Shift+t exec --no-startup-id tmux kill-session -t Music 
 bindsym $mod2+Shift+t exec --no-startup-id tmux kill-server 
 
